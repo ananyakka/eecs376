@@ -1,0 +1,21 @@
+This is a package to control a Simple Two-Dimensional Robot(developed on the simulator) 
+
+Launch the simulator by typing
+
+'roslaunch stdr_launchers server_with_map_and_gui_plus_robot.launch'
+
+Then run the robot by typing
+
+'rosrun my_stdr_control my_stdr_control'
+
+This program contains commands for the robot to navigate to the upper left corner of the map. This program is run in open loop. 
+
+
+
+Extra :
+
+Name of the package: my_stdr_control
+
+executable name: my_stdr_control
+
+cpp: src/stdr_open_loop_commander.cpp

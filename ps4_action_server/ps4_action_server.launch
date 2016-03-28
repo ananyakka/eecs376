@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+<include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+<include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>
+<node name="ps4_lidar_alarm" pkg="ps4_action_server" type="ps4_lidar_alarm" />
+<node name="ps4_action_server" pkg="ps4_action_server" type="ps4_action_server" />
+<node name="ps4_action_client" pkg="ps4_action_server" type="ps4_action_client" />
+
+</launch>

@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <ps4_action_server/my_action_serverAction.h>
+#include <ps4_action_server/path_cmdAction.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <iostream>
@@ -8,7 +8,7 @@
 #include <actionlib/server/simple_action_server.h>
 
 using namespace std;
-typedef actionlib::SimpleActionServer<ps4_action_server::my_action_serverAction> Server;
+typedef actionlib::SimpleActionServer<ps4_action_server::path_cmdAction> Server;
 
 const double g_move_speed = 0.5; // set forward speed to this value, e.g. 1m/s
 const double g_spin_speed = 0.3; 
@@ -30,13 +30,13 @@ void do_move(double distance, Server* as);
 void do_spin(double spin_ang);
 void do_inits(ros::NodeHandle &n);
 
-ps4_action_server::my_action_serverResult result;
-ps4_action_server::my_action_serverFeedback feedback;
+ps4_action_server::path_cmdResult result;
+ps4_action_server::path_cmdFeedback feedback;
 
-void callback(const ps4_action_server::my_action_serverGoalConstPtr& goal, Server* as)
+void callback(const ps4_action_server::path_cmdGoalConstPtr& goal, Server* as)
 {
     ROS_INFO("callback activated");
-    result.result=false;
+    result.rslt=false;
     geometry_msgs::Pose pose_desired;
     int npts = goal->nav_path.poses.size();
     ROS_INFO("received path goal with %d poses",npts);    
@@ -50,7 +50,7 @@ void callback(const ps4_action_server::my_action_serverGoalConstPtr& goal, Serve
     for (int i=0;i<npts;i++) //visit each subgoal 
     { 
 
-    	feedback.feedback = point+i; // populate feedback message with current path
+    	feedback.point = point+i; // populate feedback message with current path
  	    as->publishFeedback(feedback);
         // Firstly, adjust initial orientation
         pose_desired = goal->nav_path.poses[i].pose;
@@ -79,7 +79,7 @@ void callback(const ps4_action_server::my_action_serverGoalConstPtr& goal, Serve
         if(as->isPreemptRequested())
         {	
           ROS_WARN("goal cancelled!");
-          result.result = false;
+          result.rslt = false;
           as->setAborted(result); // tell the client we have given up on this goal; send the result message as well
           return; // done with callback
  		}
@@ -101,7 +101,7 @@ void callback(const ps4_action_server::my_action_serverGoalConstPtr& goal, Serve
 	    g_current_pose.orientation.w = 1.0;
 
     }
-    result.result=true;
+    result.rslt=true;
     as->setSucceeded(result); 
 }
 
@@ -209,7 +209,7 @@ void do_move(double distance, Server* as) { // always assumes robot is already o
        	if(as->isPreemptRequested())
         {	
           ROS_WARN("goal cancelled!");
-          result.result = false;
+          result.rslt = false;
           as->setAborted(result); // tell the client we have given up on this goal; send the result message as well
           do_halt();
           return; // done with callback
