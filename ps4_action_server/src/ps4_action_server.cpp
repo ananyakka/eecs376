@@ -1,5 +1,9 @@
 #include <ros/ros.h>
+<<<<<<< HEAD
 #include <ps4_action_server/path_cmdAction.h>
+=======
+#include <ps4_action_server/my_action_serverAction.h>
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
 #include <iostream>
@@ -8,7 +12,11 @@
 #include <actionlib/server/simple_action_server.h>
 
 using namespace std;
+<<<<<<< HEAD
 typedef actionlib::SimpleActionServer<ps4_action_server::path_cmdAction> Server;
+=======
+typedef actionlib::SimpleActionServer<ps4_action_server::my_action_serverAction> Server;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 
 const double g_move_speed = 0.5; // set forward speed to this value, e.g. 1m/s
 const double g_spin_speed = 0.3; 
@@ -30,6 +38,7 @@ void do_move(double distance, Server* as);
 void do_spin(double spin_ang);
 void do_inits(ros::NodeHandle &n);
 
+<<<<<<< HEAD
 ps4_action_server::path_cmdResult result;
 ps4_action_server::path_cmdFeedback feedback;
 
@@ -37,6 +46,15 @@ void callback(const ps4_action_server::path_cmdGoalConstPtr& goal, Server* as)
 {
     ROS_INFO("callback activated");
     result.rslt=false;
+=======
+ps4_action_server::my_action_serverResult result;
+ps4_action_server::my_action_serverFeedback feedback;
+
+void callback(const ps4_action_server::my_action_serverGoalConstPtr& goal, Server* as)
+{
+    ROS_INFO("callback activated");
+    result.result=false;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
     geometry_msgs::Pose pose_desired;
     int npts = goal->nav_path.poses.size();
     ROS_INFO("received path goal with %d poses",npts);    
@@ -50,7 +68,11 @@ void callback(const ps4_action_server::path_cmdGoalConstPtr& goal, Server* as)
     for (int i=0;i<npts;i++) //visit each subgoal 
     { 
 
+<<<<<<< HEAD
     	feedback.point = point+i; // populate feedback message with current path
+=======
+    	feedback.feedback = point+i; // populate feedback message with current path
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
  	    as->publishFeedback(feedback);
         // Firstly, adjust initial orientation
         pose_desired = goal->nav_path.poses[i].pose;
@@ -79,7 +101,11 @@ void callback(const ps4_action_server::path_cmdGoalConstPtr& goal, Server* as)
         if(as->isPreemptRequested())
         {	
           ROS_WARN("goal cancelled!");
+<<<<<<< HEAD
           result.rslt = false;
+=======
+          result.result = false;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
           as->setAborted(result); // tell the client we have given up on this goal; send the result message as well
           return; // done with callback
  		}
@@ -101,7 +127,11 @@ void callback(const ps4_action_server::path_cmdGoalConstPtr& goal, Server* as)
 	    g_current_pose.orientation.w = 1.0;
 
     }
+<<<<<<< HEAD
     result.rslt=true;
+=======
+    result.result=true;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
     as->setSucceeded(result); 
 }
 
@@ -209,7 +239,11 @@ void do_move(double distance, Server* as) { // always assumes robot is already o
        	if(as->isPreemptRequested())
         {	
           ROS_WARN("goal cancelled!");
+<<<<<<< HEAD
           result.rslt = false;
+=======
+          result.result = false;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
           as->setAborted(result); // tell the client we have given up on this goal; send the result message as well
           do_halt();
           return; // done with callback
@@ -229,4 +263,8 @@ void do_halt() {
           g_twist_commander.publish(g_twist_cmd);
           loop_timer.sleep(); 
           }   
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327

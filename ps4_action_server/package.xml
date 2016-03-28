@@ -7,7 +7,11 @@
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
+<<<<<<< HEAD
   <maintainer email="zhiangchen@todo.todo">zhiangchen</maintainer>
+=======
+  <maintainer email="ananya@todo.todo">ananya</maintainer>
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
@@ -31,16 +35,25 @@
   <!-- Dependencies can be catkin packages or system dependencies -->
   <!-- Examples: -->
   <!-- Use build_depend for packages you need at compile time: -->
+<<<<<<< HEAD
   <!--   <build_depend>message_generation</build_depend> -->
   <!-- Use buildtool_depend for build tool packages: -->
   <!--   <buildtool_depend>catkin</buildtool_depend> -->
   <!-- Use run_depend for packages you need at runtime: -->
   <!--   <run_depend>message_runtime</run_depend> -->
+=======
+     <build_depend>message_generation</build_depend> -->
+  <!-- Use buildtool_depend for build tool packages: -->
+  <!--   <buildtool_depend>catkin</buildtool_depend> -->
+  <!-- Use run_depend for packages you need at runtime: -->
+     <run_depend>message_runtime</run_depend> -->
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend>catkin_simple</buildtool_depend>
   <build_depend>roscpp</build_depend>
+<<<<<<< HEAD
   <run_depend>roscpp</run_depend>
 
 <build_depend>actionlib</build_depend>
@@ -52,6 +65,12 @@
 <run_depend>sensor_msgs</run_depend>
 <run_depend>std_msgs</run_depend>
 <build_depend>nav_msgs</build_depend>
+=======
+<build_depend>actionlib</build_depend>
+<build_depend>nav_msgs</build_depend>
+  <run_depend>roscpp</run_depend>
+<run_depend>actionlib</run_depend>
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 <run_depend>nav_msgs</run_depend>
   <!-- The export tag contains other, unspecified, tags -->
   <export>

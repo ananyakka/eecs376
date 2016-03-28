@@ -29,9 +29,15 @@ catkin_simple()
 
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
+<<<<<<< HEAD
  cs_add_executable(ps4_lidar_alarm src/ps4_lidar_alarm.cpp)
 cs_add_executable(ps4_action_client src/ps4_action_client.cpp)
 cs_add_executable(ps4_action_server src/ps4_action_server.cpp)
+=======
+ cs_add_executable(ps4_action_server src/ps4_action_server.cpp)
+cs_add_executable(ps4_action_client src/ps4_action_client.cpp)
+cs_add_executable(ps4_lidar_alarm src/ps4_lidar_alarm.cpp)
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package

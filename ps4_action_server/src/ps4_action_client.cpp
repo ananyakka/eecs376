@@ -1,5 +1,9 @@
 #include <ros/ros.h>
+<<<<<<< HEAD
 #include <ps4_action_server/path_cmdAction.h>
+=======
+#include <ps4_action_server/my_action_serverAction.h>
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 #include <actionlib/client/simple_action_client.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Twist.h>
@@ -19,19 +23,33 @@ bool setPosition(double x, double y, double z, geometry_msgs::Pose& Pose);
 geometry_msgs::Pose initPose();
 bool setPosition(double x, double y, double z, geometry_msgs::Pose& Pose);
 bool setOrientation(double theta, geometry_msgs::Pose& Pose);
+<<<<<<< HEAD
 void set_geometry(ps4_action_server::path_cmdGoal &goal, double length = 5.0, int num = 5);
+=======
+void set_geometry(ps4_action_server::my_action_serverGoal &goal, double length = 5.0, int num = 4);
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 
 void alarmCB(const std_msgs::Bool alarm)
 {
 	if(alarm.data==true)
+<<<<<<< HEAD
 		ROS_WARN("Alarm issued!");
+=======
+		ROS_WARN("Alarming, alarming!");
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 	g_alarm=alarm.data;
 }
 
 void doneCb(const actionlib::SimpleClientGoalState& state,
+<<<<<<< HEAD
         const ps4_action_server::path_cmdResultConstPtr& result) {
     ROS_INFO(" doneCb: server responded with state [%s]", state.toString().c_str());
     if(result->rslt==true)
+=======
+        const ps4_action_server::my_action_serverResultConstPtr& result) {
+    ROS_INFO(" doneCb: server responded with state [%s]", state.toString().c_str());
+    if(result->result==true)
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
     {
         ROS_INFO("goal finished!");
         got_goal="succeeded";
@@ -46,18 +64,30 @@ void activeCb()
 	ROS_INFO("the server processes the request!");
 }
 
+<<<<<<< HEAD
 void feedbackCb(const ps4_action_server::path_cmdFeedbackConstPtr &fdbk_msg)
 {
 	ROS_INFO("On the %dth path",fdbk_msg->point);
+=======
+void feedbackCb(const ps4_action_server::my_action_serverFeedbackConstPtr &fdbk_msg)
+{
+	ROS_INFO("The feedback shows this is the %dth path",fdbk_msg->feedback);
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 }
 
 int main(int argc, char** argv) 
 {
 	ros::init(argc, argv, "ps4_action_client"); // name this node
 	ros::NodeHandle n;
+<<<<<<< HEAD
 	actionlib::SimpleActionClient<ps4_action_server::path_cmdAction> action_client("path_action", true);
 	ros::Subscriber alarm_subscriber = n.subscribe("lidar_alarm",1,alarmCB);
 	ps4_action_server::path_cmdGoal goal;
+=======
+	actionlib::SimpleActionClient<ps4_action_server::my_action_serverAction> action_client("path_action", true);
+	ros::Subscriber alarm_subscriber = n.subscribe("lidar_alarm",1,alarmCB);
+	ps4_action_server::my_action_serverGoal goal;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 	ROS_INFO("waiting for server: ");
     bool server_exists = action_client.waitForServer(); // wait for up to 5 seconds
     // something odd in above: does not seem to wait for 5 seconds, but returns rapidly if server not running
@@ -68,7 +98,11 @@ int main(int argc, char** argv)
     }
     ROS_INFO("server connected!");
 
+<<<<<<< HEAD
 	geometry_msgs::Quaternion quat;
+=======
+    geometry_msgs::Quaternion quat;
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
     geometry_msgs::PoseStamped pose_stamped;
     geometry_msgs::Pose pose;
     set_geometry(goal,3);
@@ -104,8 +138,13 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 void set_geometry(ps4_action_server::path_cmdGoal &goal, double length, int num)
+=======
+//---------change the path 
+void set_geometry(ps4_action_server::my_action_serverGoal &goal, double length, int num)
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 {
     geometry_msgs::Quaternion quat;
     geometry_msgs::PoseStamped pose_stamped;
@@ -123,7 +162,11 @@ void set_geometry(ps4_action_server::path_cmdGoal &goal, double length, int num)
         goal.nav_path.poses.push_back(pose_stamped);
     }
 }
+<<<<<<< HEAD
 
+=======
+//-------------
+>>>>>>> 6f094d221d303f4556653f28747290eeb0914327
 geometry_msgs::Quaternion convertPlanarPhi2Quaternion(double phi) {
     geometry_msgs::Quaternion quaternion;
     quaternion.x = 0.0;
